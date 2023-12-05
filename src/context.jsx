@@ -1,10 +1,10 @@
 import { useContext, useReducer } from "react";
+import PropTypes from "prop-types";
 import { createContext } from "react";
 import reducer from "./reducer";
 
 const AppContext = createContext();
 const initialState = {
-  s: "hello",
   arr: [{ id: 1, isTrue: false, text: "this is some text" }],
 };
 
@@ -24,13 +24,21 @@ function AppProvider({ children }) {
     dispatch({ type: "DELETE_TASK", payload: { id } });
   }
 
+  function toggleCheck(id) {
+    dispatch({ type: "TOGGLE_CHECK", payload: { id } });
+  }
+
   return (
-    <AppContext.Provider value={{ state, addTask, deleteTask }}>
+    <AppContext.Provider value={{ state, addTask, deleteTask, toggleCheck }}>
       {children}
     </AppContext.Provider>
   );
 }
 
 export const useGlobalContext = () => useContext(AppContext);
+
+AppProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export default AppProvider;

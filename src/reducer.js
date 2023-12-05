@@ -9,6 +9,15 @@ const reducer = (state, action) => {
       const newArr = state.arr.filter((x) => x.id != action.payload.id);
       return { ...state, arr: [...newArr] };
     }
+    case "TOGGLE_CHECK": {
+      const newArr = state.arr.map((x) => {
+        if (x.id === action.payload.id) {
+          return { ...x, isTrue: !x.isTrue };
+        }
+        return x;
+      });
+      return { ...state, arr: [...newArr] };
+    }
   }
   return state;
 };
