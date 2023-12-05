@@ -1,19 +1,51 @@
 import PropTypes from "prop-types";
 import { useGlobalContext } from "../context";
+import { useState } from "react";
 
 function Task({ id, text, isTrue }) {
-  const { deleteTask, toggleCheck } = useGlobalContext();
+  const { deleteTask, toggleCheck, updateTask } = useGlobalContext();
+  const [edit, setEdit] = useState(false);
+  const [editedText, setEditedText] = useState(text);
+
+  const handleEditToggle = () => {
+    setEdit(!edit);
+  };
+
+  const handleInputChange = (e) => {
+    setEditedText(e.target.value);
+  };
+
   return (
     <li>
-      <label>
-        <input
-          type="checkbox"
-          checked={isTrue}
-          onChange={() => toggleCheck(id)}
-        />
-        {text}
-      </label>{" "}
-      <button onClick={() => deleteTask(id)}>delete</button>
+      {edit ? (
+        <input type="text" value={editedText} onChange={handleInputChange} />
+      ) : (
+        <label>
+          <input
+            type="checkbox"
+            checked={isTrue}
+            onChange={() => toggleCheck(id)}
+          />
+          {text}
+        </label>
+      )}
+      <button
+        onClick={() => {
+          edit ? handleEditToggle() : deleteTask(id);
+        }}
+      >
+        {edit ? "cancel" : "delete"}
+      </button>{" "}
+      <button
+        onClick={() => {
+          if (edit) {
+            updateTask(id, editedText);
+          }
+          handleEditToggle();
+        }}
+      >
+        {edit ? "save" : "edit"}
+      </button>
     </li>
   );
 }

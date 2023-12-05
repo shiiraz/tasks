@@ -27,9 +27,14 @@ function AppProvider({ children }) {
   function toggleCheck(id) {
     dispatch({ type: "TOGGLE_CHECK", payload: { id } });
   }
+  function updateTask(id, text) {
+    dispatch({ type: "UPDATE_TASK", payload: { id, text } });
+  }
 
   return (
-    <AppContext.Provider value={{ state, addTask, deleteTask, toggleCheck }}>
+    <AppContext.Provider
+      value={{ state, addTask, deleteTask, toggleCheck, updateTask }}
+    >
       {children}
     </AppContext.Provider>
   );

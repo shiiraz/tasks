@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useGlobalContext } from "../context";
 
 function InputComponent() {
   const [inputText, setInputText] = useState("");
   const { state, addTask } = useGlobalContext();
+
+  useEffect(() => {
+    console.log(state.arr);
+  }, [state.arr]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -12,7 +16,6 @@ function InputComponent() {
     }
     addTask(inputText);
     setInputText("");
-    console.log(state.arr);
   };
 
   return (

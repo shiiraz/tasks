@@ -18,8 +18,18 @@ const reducer = (state, action) => {
       });
       return { ...state, arr: [...newArr] };
     }
+    case "UPDATE_TASK": {
+      const newArr = state.arr.map((x) => {
+        if (x.id === action.payload.id) {
+          return { ...x, text: action.payload.text };
+        }
+        return x;
+      });
+      return { ...state, arr: [...newArr] };
+    }
   }
-  return state;
+  //   return state;
+  throw new Error("No matching Action Type");
 };
 
 export default reducer;
