@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useGlobalContext } from "../context";
 import { useState } from "react";
 
-function Task({ id, text, isTrue }) {
+function Task({ id, text, isDone }) {
   const { deleteTask, toggleCheck, updateTask } = useGlobalContext();
   const [edit, setEdit] = useState(false);
   const [editedText, setEditedText] = useState(text);
@@ -23,7 +23,7 @@ function Task({ id, text, isTrue }) {
         <label>
           <input
             type="checkbox"
-            checked={isTrue}
+            checked={isDone}
             onChange={() => toggleCheck(id)}
           />
           {text}
@@ -53,7 +53,7 @@ function Task({ id, text, isTrue }) {
 Task.propTypes = {
   id: PropTypes.number.isRequired,
   text: PropTypes.string.isRequired,
-  isTrue: PropTypes.bool,
+  isDone: PropTypes.bool,
 };
 
 export default Task;

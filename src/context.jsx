@@ -5,7 +5,7 @@ import reducer from "./reducer";
 
 const AppContext = createContext();
 const initialState = {
-  arr: [{ id: 1, isTrue: false, text: "this is some text" }],
+  arr: [{ id: 1, isDone: false, text: "this is some text" }],
 };
 
 function AppProvider({ children }) {
@@ -16,7 +16,7 @@ function AppProvider({ children }) {
       state.arr.length > 0 ? state.arr[state.arr.length - 1].id + 1 : 0;
     dispatch({
       type: "ADD_TASK",
-      payload: { id: newId, isTrue: false, text: text },
+      payload: { id: newId, isDone: false, text: text },
     });
   }
 

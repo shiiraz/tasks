@@ -6,17 +6,17 @@ const reducer = (state, action) => {
         arr: [...state.arr, action.payload],
       };
     case "DELETE_TASK": {
-      const newArr = state.arr.filter((x) => x.id != action.payload.id);
-      return { ...state, arr: [...newArr] };
+      const newArr = state.arr.filter((x) => x.id !== action.payload.id);
+      return { ...state, arr: newArr };
     }
     case "TOGGLE_CHECK": {
       const newArr = state.arr.map((x) => {
         if (x.id === action.payload.id) {
-          return { ...x, isTrue: !x.isTrue };
+          return { ...x, isDone: !x.isDone };
         }
         return x;
       });
-      return { ...state, arr: [...newArr] };
+      return { ...state, arr: newArr };
     }
     case "UPDATE_TASK": {
       const newArr = state.arr.map((x) => {
@@ -25,11 +25,11 @@ const reducer = (state, action) => {
         }
         return x;
       });
-      return { ...state, arr: [...newArr] };
+      return { ...state, arr: newArr };
     }
+    default:
+      throw new Error("No matching Action Type");
   }
-  //   return state;
-  throw new Error("No matching Action Type");
 };
 
 export default reducer;
