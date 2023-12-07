@@ -2,14 +2,9 @@ import PropTypes from "prop-types";
 import { useGlobalContext } from "../context";
 import { useState } from "react";
 
-function Task({ id, text, isDone }) {
+function Task({ id, text, isDone, onEditToggle, isEditable }) {
   const { deleteTask, toggleCheck, updateTask } = useGlobalContext();
-  const [edit, setEdit] = useState(false);
   const [editedText, setEditedText] = useState(text);
-
-  const handleEditToggle = () => {
-    setEdit(!edit);
-  };
 
   const handleInputChange = (e) => {
     setEditedText(e.target.value);
@@ -17,7 +12,7 @@ function Task({ id, text, isDone }) {
 
   return (
     <li>
-      {edit ? (
+      {isEditable ? (
         <input type="text" value={editedText} onChange={handleInputChange} />
       ) : (
         <label>
@@ -31,20 +26,20 @@ function Task({ id, text, isDone }) {
       )}
       <button
         onClick={() => {
-          edit ? handleEditToggle() : deleteTask(id);
+          isEditable ? onEditToggle() : deleteTask(id);
         }}
       >
-        {edit ? "cancel" : "delete"}
+        {isEditable ? "cancel" : "delete"}
       </button>{" "}
       <button
         onClick={() => {
-          if (edit) {
+          if (isEditable) {
             updateTask(id, editedText);
           }
-          handleEditToggle();
+          onEditToggle();
         }}
       >
-        {edit ? "save" : "edit"}
+        {isEditable ? "save" : "edit"}
       </button>
     </li>
   );
@@ -53,7 +48,9 @@ function Task({ id, text, isDone }) {
 Task.propTypes = {
   id: PropTypes.number.isRequired,
   text: PropTypes.string.isRequired,
-  isDone: PropTypes.bool,
+  isDone: PropTypes.bool.isRequired,
+  onEditToggle: PropTypes.func.isRequired,
+  isEditable: PropTypes.bool.isRequired,
 };
 
 export default Task;
