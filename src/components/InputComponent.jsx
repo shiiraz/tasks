@@ -1,13 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useGlobalContext } from "../context";
 
 function InputComponent() {
   const [inputText, setInputText] = useState("");
-  const { state, addTask } = useGlobalContext();
-
-  useEffect(() => {
-    console.log(state.arr);
-  }, [state.arr]);
+  const { addTask } = useGlobalContext();
 
   const handleSubmit = (e) => {
     e.preventDefault();

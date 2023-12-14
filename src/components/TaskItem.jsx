@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useGlobalContext } from "../context";
 import { useState } from "react";
 
-function Task({ id, text, isDone, onEditToggle, isEditable }) {
+function TaskItem({ id, text, isDone, onEditToggle, isEditable }) {
   const { deleteTask, toggleCheck, updateTask } = useGlobalContext();
   const [editedText, setEditedText] = useState(text);
 
@@ -45,7 +45,7 @@ function Task({ id, text, isDone, onEditToggle, isEditable }) {
   );
 }
 
-Task.propTypes = {
+TaskItem.propTypes = {
   id: PropTypes.number.isRequired,
   text: PropTypes.string.isRequired,
   isDone: PropTypes.bool.isRequired,
@@ -53,4 +53,4 @@ Task.propTypes = {
   isEditable: PropTypes.bool.isRequired,
 };
 
-export default Task;
+export default TaskItem;

@@ -1,5 +1,5 @@
 import { useGlobalContext } from "../context";
-import Task from "./Task";
+import TaskItem from "./TaskItem";
 import { useState } from "react";
 
 function Tasklist() {
@@ -17,7 +17,7 @@ function Tasklist() {
   return (
     <ul>
       {state.arr.map((x) => (
-        <Task
+        <TaskItem
           key={x.id}
           id={x.id}
           text={x.text}
