@@ -9,10 +9,10 @@ A simple React application for managing tasks, allowing users to add, delete, ed
 - [Usage](#usage)
 - [Features](#features)
 - [Live Demo](#live-demo)
-  
+
 ## Description
 
-The Task Manager App is a basic React application built with Vite that provides users with the ability to manage tasks efficiently. It leverages the `Context API` for global state management and incorporates a `reducer` to handle task-related actions.
+The Task Manager App is a basic React application built with Vite that provides users with the ability to manage tasks efficiently. It leverages the `Context API` for global state management and incorporates a `reducer` to handle task-related actions. Also uses `localStorage` for task persistence.
 
 ## Installation
 
