@@ -1,15 +1,19 @@
-import { useContext, useReducer } from "react";
+import { useContext, useReducer, useEffect } from "react";
 import PropTypes from "prop-types";
 import { createContext } from "react";
 import reducer from "./reducer";
 
 const AppContext = createContext();
-const initialState = {
-  arr: [{ id: 1, isDone: false, text: "this is some text" }],
-};
+
+const persistedState = localStorage.getItem("tasks");
+const initialState = persistedState ? JSON.parse(persistedState) : { arr: [] };
 
 function AppProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(state));
+  }, [state]);
 
   function addTask(text) {
     const newId =
